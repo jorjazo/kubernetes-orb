@@ -10,7 +10,7 @@ workflows:
       - orb/lint
       - orb/pack
       - orb/publish-dev:
-          orb-name: jorjazo/boot
+          orb-name: jorjazo/kubernetes
           context: personal
           requires:
             - orb/pack
@@ -20,12 +20,12 @@ workflows:
           requires:
             - orb/publish-dev
       - orb/dev-promote-prod-from-commit-subject:
-          orb-name: jorjazo/boot
+          orb-name: jorjazo/kubernetes
           context: personal
           add-pr-comment: false
           fail-if-semver-not-indicated: true
           publish-version-tag: true
-          ssh-fingerprints: c9:f4:40:d8:eb:51:6b:bf:71:37:4b:89:22:22:c7:3d
+          ssh-fingerprints: b2:a6:74:c0:d2:4e:20:93:c6:98:f2:f9:66:6b:d0:9d
           requires:
             - approve-promote
           filters:
