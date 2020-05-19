@@ -1,0 +1,7 @@
+---
+description: |
+  Default executor.
+
+default:
+  docker:
+    - image: 'cimg/base:stable'

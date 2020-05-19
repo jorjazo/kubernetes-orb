@@ -1,0 +1,15 @@
+---
+version: 2.1
+
+description: >
+  Deploy from service account token.
+  Easily update docker and build using builx for cross-arch building.
+  Pre-integrated with jorjazo/boot orb for easy Spring Boot / Gradle
+  build and kubernetes deployment.
+
+display:
+  source_url: https://github.com/jorjazo/kubernetes-orb
+  home_url: https://jorjazo.dev/
+
+orbs:
+  ci-kube: circleci/kubernetes@0.11.0

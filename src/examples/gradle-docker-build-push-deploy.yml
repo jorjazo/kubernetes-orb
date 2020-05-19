@@ -1,0 +1,29 @@
+---
+description: |
+  Use gradle to test and build a boot jar and then generate a docker image.
+usage:
+  version: 2.1
+  orbs:
+    boot: jorjazo/boot@1.1.1
+    kube: jorjazo/kubernetes@1.0.0
+  workflows:
+    build-docker-deploy:
+      jobs:
+        - boot/build-test-jar
+        - boot/docker-build-push:
+            requires:
+              - boot/build-test-jar
+            context: ctx    # DOCKER_LOGIN, DOCKER_PASSWORD
+            base-image: adoptopenjdk:14-hotspot
+        - approve-deploy:
+            type: approval
+            requires:
+            - boot/docker-build-push
+        - kube/deploy:
+            context: casa   # KUBE_CERT
+            requires:
+              - approve-deploy
+            server: ${KUBE_SERVER}
+            token: ${KUBE_TOKEN}
+            deployment: my-deployment
+            container: my-container-name
